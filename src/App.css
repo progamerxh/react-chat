@@ -1,0 +1,244 @@
+ul{
+  list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.App {
+  height: 100vh;
+  left: 0;
+  top: 0;
+  text-align: center;
+  border: none;
+  background:  #f7f7f7;
+  margin: 0 auto;
+  display: flex;
+}
+
+.left{
+  flex: 0 0 25%;
+  max-width: 420px;
+  min-width: 240px;
+  position: relative;
+}
+.right{
+  position: relative;
+  border-left: 1px solid rgba(0, 0, 0, .20);
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+}
+.top{
+  border-bottom: 1px solid rgba(0, 0, 0, .10);
+  box-sizing: border-box;
+  height: 50px;
+  justify-content: space-between;
+  padding: 8px;
+  width: 100%;
+}
+
+.bot{
+  height: 100vh;
+  background: #fff;
+  overflow-y: scroll;
+}
+.icon{
+  margin: 5px;
+  float: left;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+.search{
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, .20);
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  height: 30px;
+  width: 80%;
+  line-height: 30px;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.tag .item{
+border-bottom: 1px solid rgba(0, 0, 0, .10);
+cursor: pointer;
+}
+
+.addtag{
+  display: none;
+}
+
+.tag .item:hover  {
+background: #f7f7f7;
+}
+
+.texttag{
+  margin-right: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  line-height: 40px;
+  font-weight: 600;
+}
+.column {
+  float: left;
+  width: 29%;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, .20);
+  padding: 15px;
+  margin: 2%;
+  background-color: #fff;
+}
+.column img{
+  background: #808080;
+  width:100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.column h2, p{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+  white-space: nowrap;
+}
+
+.row{
+  margin-right: 5%;
+  margin-left: 5%;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.join{
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid rgb(0, 140, 255);
+  background: #fff;
+  color:  rgb(0, 140, 255);
+  width: 50%;
+}
+.join:hover{
+  background: rgb(0, 140, 255);
+  color:  #fff;
+}
+.messages{
+  height: 75%;
+  border-bottom: 1px solid rgba(0, 0, 0, .10);
+  background: #fff;
+  overflow-y: scroll;
+}
+.send{
+  height: 25%;
+  border-bottom: 1px solid rgba(0, 0, 0, .10);
+  background: #fff;
+}
+#message-box{
+  overflow: hidden;
+}
+.send .type{
+  width: 100%;
+  text-align: top;
+  border: none;
+  padding: 1em;
+}
+*:focus{
+  outline: none;
+}
+.messages .item{
+  margin-top: 14px;
+  padding-left: 12px;
+  margin-bottom: 15px;
+  position: relative;
+  width: fit-content;
+  font-style: normal;
+  max-width: 55%;
+}
+
+.messages .sended
+{
+  float: right;
+}
+.content{
+  margin-left: 36px;
+}
+.content h2{
+ font-size: 12px;
+ text-align: left;
+}
+.recieve{
+color: black;
+background: #f7f7f7;
+font-size: 14px;
+border-radius: 1.3em;
+text-align: left;
+padding: 6px 12px;
+}
+.avt{
+  background: rgb(0, 140, 255);
+  border-radius: 100%;
+  height: 32px;
+  width: 32px;
+  max-height: 28px;
+  max-width: 28px;
+  bottom: 2px;
+  position: absolute;
+}
+
+.inbox .item{
+  cursor: pointer;
+  height: 64px;
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  padding-left: 12px;
+}
+
+.inbox .avt{
+  align-items: center;
+    margin-right: 9px;
+    height: 50px;
+    width: 50px;
+    max-height: 50px;
+    max-width: 50px;
+    border-radius: 100%;
+    background:  rgb(0, 140, 255);
+}
+
+.inbox .content{
+  flex: 1 1 auto;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 16px 0 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  margin-left: 56px;
+  text-overflow: ellipsis;
+}
+.inbox .name{
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 1);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.inbox .lastmessage{
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
