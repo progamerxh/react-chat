@@ -14,9 +14,12 @@ class App extends Component {
     super(props);
     this.state = {
       user: null,
+      title: ''
     }
   }
-
+  onRoomJoin = (roomname) => {
+    this.setState({title:roomname});
+  }
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user });
@@ -33,7 +36,6 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <div className="App">
         <div className="left">
@@ -43,14 +45,14 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Tags} />
             <Route exact path='/rooms' component={Tags} />
-            <Route exact path='/inbox' component={Inboxs} />
+            <Route exact path='/room=:roomname' component={Inboxs} />
           </Switch>
         </div>
 
         <div className="right">
           <div className="top">
             <div className="tittle">
-              Room
+              {this.state.title}
             </div>
             {!this.state.user ? (
               <div className="account">
@@ -77,8 +79,8 @@ class App extends Component {
           </div>
           <Switch>
             <Route exact path='/' component={Rooms} />
-            <Route exact path='/rooms' component={Rooms} />
-            <Route exact path='/inbox' component={Messages} />
+            <Route exact path='/rooms' render={(props) => <Rooms {...props} onRoomJoin={this.onRoomJoin} />} />
+            <Route exact path='/room=:roomname' render={(props) => <Messages {...props} user={this.state.user} />} />
           </Switch>
         </div>
       </div>

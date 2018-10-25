@@ -9,7 +9,7 @@ class Messages extends Component {
         this.state = {
             list: [],
         };
-        this.messageRef = firebase.database().ref('messages');
+        this.messageRef = firebase.database().ref().child('messages/' + this.props.match.params.roomname);
         this.listenMessages();
     }
 
@@ -25,6 +25,10 @@ class Messages extends Component {
             });
     }
 
+    componentDidMount(){
+        this.listenMessages();
+    }
+
     render() {
         return (
             <div id="message-box" className="bot">
@@ -35,7 +39,7 @@ class Messages extends Component {
                         )}
                     </ul>
                 </div>
-                <MessageForm />
+                <MessageForm user={this.props.user}/>
             </div>
         );
     }

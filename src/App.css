@@ -128,13 +128,16 @@ background: #f7f7f7;
   border-radius: 50%;
 }
 
-.column h2, p{
+.column h4, p{
   text-overflow: ellipsis;
   overflow: hidden;
   display: block;
   white-space: nowrap;
 }
-
+.column h4{
+  margin: 10px;
+  color: rgb(0, 140, 255);
+}
 .row{
   margin-right: 5%;
   margin-left: 5%;
@@ -206,10 +209,12 @@ button {
 .content{
   margin-left: 36px;
 }
+
 .content h2{
  font-size: 12px;
  text-align: left;
 }
+
 .recieve{
 color: black;
 background: #f7f7f7;

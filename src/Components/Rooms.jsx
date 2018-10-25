@@ -1,66 +1,53 @@
 import React, { Component } from 'react';
+import Room from './Room';
+import firebase from 'firebase';
 
 class Rooms extends Component {
-    handleOnClick() {
-        this.props.history.push(`/inbox`)
+    constructor(props) {
+        super(props);
+        this.state = {
+            list: [],
+        };
+        this.roomRef = firebase.database().ref().child('rooms');
+        this.listenRooms();
+    }
+
+    onRoomJoin = (roomname) => {
+        this.props.onRoomJoin(roomname);
+    }
+
+    listenRooms() {
+        this.roomRef
+            .limitToLast(10)
+            .on('value', rooms => {
+                var list = [];
+                rooms.forEach(room => {
+                    let name = room.key;
+                    let tags = room.val().tags;
+                    list.push({ name, tags })
+                })
+                if (rooms.val()) {
+                    this.setState({
+                        list: list
+                    });
+                }
+            });
+    }
+    componentDidMount() {
+        this.listenRooms();
     }
     render() {
         return (
             <div className="bot">
                 <div class="row">
-                    <div class="column" >
-                        <img alt="" className="groupphoto"></img>
-                        <h2>Room 1aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2>
-                        <p>Some text.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.</p>
-                        <button className="join"
-                            onClick={() => this.handleOnClick()}>
-                            <h5>Join</h5>
-                        </button>
-                    </div>
-                    <div class="column">
-                        <img alt="" className="groupphoto"></img>
-                        <h2>Room 2</h2>
-                        <p>Some text..</p>
-                        <button className="join">
-                            <h5>Join</h5>
-                        </button>
-                    </div>
-                    <div class="column" >
-                        <img alt="" className="groupphoto"></img>
-                        <h2>Room 3</h2>
-                        <p>Some text..</p>
-                        <button className="join">
-                            <h5>Join</h5>
-                        </button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="column" >
-                        <img alt="" className="groupphoto"></img>
-                        <h2>Room 4</h2>
-                        <p>Some text..</p>
-                        <button className="join">
-                            <h5>Join</h5>
-                        </button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="column" >
-                        <img alt="" className="groupphoto"></img>
-                        <h2>Room 3</h2>
-                        <p>Some text..</p>
-                        <button className="join">
-                            <h5>Join</h5>
-                        </button>
-                    </div>
-                    <div class="column" >
-                        <img alt="" className="groupphoto"></img>
-                        <h2>Room 4</h2>
-                        <p>Some text..</p>
-                        <button className="join">
-                            <h5>Join</h5>
-                        </button>
-                    </div>
+                    {this.state.list.map((item, index) =>
+                        <Room
+                            {...this.props}
+                            key={index}
+                            room={item}
+                            onRoomJoin={this.onRoomJoin}
+                        />
+                    )}
                 </div>
             </div>
         );

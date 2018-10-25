@@ -9,7 +9,7 @@ class MessageForm extends Component {
             message: '',
             list: [],
         };
-        this.messageRef = firebase.database().ref('messages');
+        this.messageRef = firebase.database().ref().child('messages/CNMTPTPM');
     }
 
     componentWillReceiveProps(nextProps) {
