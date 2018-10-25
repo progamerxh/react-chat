@@ -35,8 +35,35 @@ ul{
   justify-content: space-between;
   padding: 8px;
   width: 100%;
+  
+}
+.top .tittle{
+  position: relative;
+  width: fit-content;
+  float: left;
+  color: black;
+  font-size: 24px;
+}
+.account{
+  margin-right: 15px;
+  float: right;
+  width: fit-content;
+  box-sizing: border-box;
+  line-height: 32px;
 }
 
+.account .button{
+  float: right;
+  cursor: pointer;
+  border: none;
+  background: #f7f7f7;
+  color:  rgb(0, 140, 255);
+}
+.account .avt{
+  position: relative;
+  bottom: unset;
+  cursor: pointer;
+}
 .bot{
   height: 100vh;
   background: #fff;
@@ -118,7 +145,7 @@ background: #f7f7f7;
   display: table;
   clear: both;
 }
-.join{
+button {
   cursor: pointer;
   border-radius: 5px;
   border: 1px solid rgb(0, 140, 255);
@@ -138,6 +165,7 @@ background: #f7f7f7;
 }
 .send{
   height: 25%;
+  width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, .10);
   background: #fff;
 }
@@ -145,10 +173,18 @@ background: #f7f7f7;
   overflow: hidden;
 }
 .send .type{
-  width: 100%;
-  text-align: top;
-  border: none;
+  margin-right: 12px;
+  float: left;
+  border: none; 
   padding: 1em;
+  width: 90%;
+  font-size: 14px;
+}
+.send button{
+  position: relative;
+  width: fit-content;
+  margin: 15px;
+  font-size: 16px;
 }
 *:focus{
   outline: none;

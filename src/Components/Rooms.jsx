@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 class Rooms extends Component {
+    handleOnClick() {
+        this.props.history.push(`/inbox`)
+    }
     render() {
         return (
             <div className="bot">
@@ -9,7 +12,8 @@ class Rooms extends Component {
                         <img alt="" className="groupphoto"></img>
                         <h2>Room 1aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2>
                         <p>Some text.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.</p>
-                        <button className="join">
+                        <button className="join"
+                            onClick={() => this.handleOnClick()}>
                             <h5>Join</h5>
                         </button>
                     </div>
