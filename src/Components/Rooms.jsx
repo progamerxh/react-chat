@@ -12,9 +12,6 @@ class Rooms extends Component {
         this.listenRooms();
     }
 
-    onRoomJoin = (roomname) => {
-        this.props.onRoomJoin(roomname);
-    }
 
     listenRooms() {
         this.roomRef
@@ -39,13 +36,12 @@ class Rooms extends Component {
     render() {
         return (
             <div className="bot">
-                <div class="row">
+                <div className="row">
                     {this.state.list.map((item, index) =>
                         <Room
                             {...this.props}
                             key={index}
                             room={item}
-                            onRoomJoin={this.onRoomJoin}
                         />
                     )}
                 </div>

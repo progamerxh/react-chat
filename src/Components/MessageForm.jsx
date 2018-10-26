@@ -5,38 +5,55 @@ class MessageForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: 'Sebastian',
+            user: null,
             message: '',
             list: [],
         };
-        this.messageRef = firebase.database().ref().child('messages/CNMTPTPM');
+        if (this.props.match.params.touserid && this.props.user) {
+            var inboxuid = (this.props.user.uid < this.props.match.params.touserid) ? this.props.user.uid + this.props.match.params.touserid
+                : this.props.match.params.touserid + this.props.user.uid;
+            this.inboxRef = firebase.database().ref().child('inbox/' + inboxuid);
+        } else
+            this.messageRef = firebase.database().ref().child('messages/' + this.props.match.params.roomname);
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.user) {
-            this.setState({ userName: nextProps.user.displayName });
+            this.setState({ user: nextProps.user });
         }
     }
 
-    handleChange(event) {
-        this.setState({ message: event.target.value });
-
+    handleChange = e => {
+        this.setState({ message: e.target.value });
     }
 
     handleSend() {
-        if (this.state.message) {
-            var newItem = {
-                userName: this.state.userName,
-                message: this.state.message,
+        if (this.state.message ) {
+            if (this.inboxRef) {
+                var newItem = {
+                    sendid: this.state.user.uid,
+                    sendname: this.state.user.displayName,
+                    message: this.state.message,
+                    recieveid: this.props.touserid,
+                    recievename: this.props.touserid
+                }
+                this.inboxRef.push(newItem);
             }
-            this.messageRef.push(newItem);
+            else {
+                var newItem = {
+                    userName: this.state.user.displayName,
+                    message: this.state.message,
+                }
+                this.messageRef.push(newItem);
+
+            }
             this.setState({ message: '' });
         }
     }
 
     handleKeyPress(event) {
         if (event.key !== 'Enter')
-         return;
+            return;
         this.handleSend();
     }
 
@@ -48,7 +65,7 @@ class MessageForm extends Component {
                     placeholder="Type message..."
                     aria-label="Type message"
                     value={this.state.message}
-                    onChange={this.handleChange.bind(this)}
+                    onChange={this.handleChange}
                     onKeyPress={this.handleKeyPress.bind(this)} />
 
                 <button

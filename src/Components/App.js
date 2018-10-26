@@ -7,6 +7,7 @@ import firebase from 'firebase';
 import firebaseConfig from '../config';
 import SearchForm from './SearchForm'; import { Link, Route, Switch } from 'react-router-dom'
 import '../App.css'
+
 firebase.initializeApp(firebaseConfig);
 
 class App extends Component {
@@ -17,9 +18,7 @@ class App extends Component {
       title: ''
     }
   }
-  onRoomJoin = (roomname) => {
-    this.setState({title:roomname});
-  }
+
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user });
@@ -43,9 +42,9 @@ class App extends Component {
             <SearchForm />
           </div>
           <Switch>
-            <Route exact path='/' component={Tags} />
+            <Route exact path='/' render={(props) => <Tags {...props} />} />
             <Route exact path='/rooms' component={Tags} />
-            <Route exact path='/room=:roomname' component={Inboxs} />
+            <Route path='/inbox/' component={Inboxs} />
           </Switch>
         </div>
 
@@ -63,24 +62,25 @@ class App extends Component {
                   Sign in
             </button>
               </div>
-            ) : (console.log(this.state.user),
-              <div className="account">
-                <img className="avt"
-                  src={this.state.user.photoURL}
-                  alt={this.state.user.displayName}
-                />
-                <button
-                  className="button"
-                  onClick={this.handleLogOut.bind(this)}>
-                  Logout
+            ) : (
+                <div className="account">
+                  <img className="avt"
+                    src={this.state.user.photoURL}
+                    alt={this.state.user.displayName}
+                  />
+                  <button
+                    className="button"
+                    onClick={this.handleLogOut.bind(this)}>
+                    Logout
                  </button>
-              </div>
+                </div>
               )}
           </div>
           <Switch>
             <Route exact path='/' component={Rooms} />
-            <Route exact path='/rooms' render={(props) => <Rooms {...props} onRoomJoin={this.onRoomJoin} />} />
-            <Route exact path='/room=:roomname' render={(props) => <Messages {...props} user={this.state.user} />} />
+            <Route exact path='/rooms' render={(props) => <Rooms {...props} />} />
+            <Route exact path='/room/:roomname' render={(props) => <Messages {...props} user={this.state.user} />} />
+            <Route exact path='/inbox/:touserid' render={(props) => <Messages {...props} user={this.state.user} />} />
           </Switch>
         </div>
       </div>
