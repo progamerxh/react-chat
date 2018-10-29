@@ -8,12 +8,11 @@ class Rooms extends Component {
         this.state = {
             list: [],
         };
-        this.roomRef = firebase.database().ref().child('rooms');
-        this.listenRooms();
     }
 
 
     listenRooms() {
+        this.roomRef = firebase.database().ref().child('rooms');
         this.roomRef
             .limitToLast(10)
             .on('value', rooms => {
@@ -30,9 +29,11 @@ class Rooms extends Component {
                 }
             });
     }
+
     componentDidMount() {
         this.listenRooms();
     }
+
     render() {
         return (
             <div className="bot">

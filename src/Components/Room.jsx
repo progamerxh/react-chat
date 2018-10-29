@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 export default class Message extends Component {
-
+    constructor(props) {
+        super(props);
+    }
     handleOnClick() {
         this.props.history.push(`/room/` + this.props.room.name)
     }

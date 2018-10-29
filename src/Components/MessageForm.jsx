@@ -9,12 +9,7 @@ class MessageForm extends Component {
             message: '',
             list: [],
         };
-        if (this.props.match.params.touserid && this.props.user) {
-            var inboxuid = (this.props.user.uid < this.props.match.params.touserid) ? this.props.user.uid + this.props.match.params.touserid
-                : this.props.match.params.touserid + this.props.user.uid;
-            this.inboxRef = firebase.database().ref().child('inbox/' + inboxuid);
-        } else
-            this.messageRef = firebase.database().ref().child('messages/' + this.props.match.params.roomname);
+    
     }
 
     componentWillReceiveProps(nextProps) {
@@ -28,6 +23,12 @@ class MessageForm extends Component {
     }
 
     handleSend() {
+        if (this.props.match.params.touserid && this.props.user) {
+            var inboxuid = (this.props.user.uid < this.props.match.params.touserid) ? this.props.user.uid + this.props.match.params.touserid
+                : this.props.match.params.touserid + this.props.user.uid;
+            this.inboxRef = firebase.database().ref().child('inbox/' + inboxuid);
+        } else
+            this.messageRef = firebase.database().ref().child('messages/' + this.props.match.params.roomname);
         if (this.state.message ) {
             if (this.inboxRef) {
                 var newItem = {

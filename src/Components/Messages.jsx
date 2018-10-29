@@ -9,17 +9,18 @@ class Messages extends Component {
         this.state = {
             list: [],
         };
-        if (this.props.match.params.touserid && this.props.user) {
-            var inboxuid = (this.props.user.uid < this.props.match.params.touserid) ? this.props.user.uid + this.props.match.params.touserid
-                : this.props.match.params.touserid + this.props.user.uid;
-            this.inboxRef = firebase.database().ref().child('inbox/' + inboxuid);
-        } else
-            this.messageRef = firebase.database().ref().child('messages/' + this.props.match.params.roomname);
-        this.listenMessages();
+
     }
 
     listenMessages() {
-        if (this.props.match.params.touserid ) {
+        if (this.props.match.params.touserid && this.props.user) {
+            var inboxuid = (this.props.user.uid < this.props.match.params.touserid) ? this.props.user.uid + this.props.match.params.touserid
+                : this.props.match.params.touserid + this.props.user.uid;
+            console.log(inboxuid);
+            this.inboxRef = firebase.database().ref().child('inbox/' + inboxuid);
+        } else
+            this.messageRef = firebase.database().ref().child('messages/' + this.props.match.params.roomname);
+        if (this.props.match.params.touserid && this.props.user) {
             this.inboxRef
                 .limitToLast(10)
                 .on('value', message => {
@@ -43,7 +44,11 @@ class Messages extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        this.listenMessages();
+    }
+
+    componentWillReceiveProps() {
         this.listenMessages();
     }
 
@@ -64,7 +69,7 @@ class Messages extends Component {
                 <MessageForm
                     {...this.props}
                     touserid={this.props.match.params.touserid}
-                    user={this.props.user} />
+                />
             </div>
         );
     }

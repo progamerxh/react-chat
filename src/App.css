@@ -5,20 +5,22 @@ ul{
 }
 
 .App {
-  height: 100vh;
-  left: 0;
-  top: 0;
+  height: 90vh;
+  width: 80vw;
   text-align: center;
-  border: none;
-  background:  #f7f7f7;
-  margin: 0 auto;
+  margin: 5vh auto;
+  background: #fff;
   display: flex;
+  flex-direction: row;
 }
 
 .left{
-  flex: 0 0 25%;
+  background: #333333;
+  flex: 1;
   max-width: 420px;
   min-width: 240px;
+  display: flex;
+  flex-direction: column;
   position: relative;
 }
 .right{
@@ -31,11 +33,14 @@ ul{
 .top{
   border-bottom: 1px solid rgba(0, 0, 0, .10);
   box-sizing: border-box;
-  height: 50px;
+  height: 10%;
+  min-height: 50px;
   justify-content: space-between;
   padding: 8px;
   width: 100%;
-  
+}
+.right .top{
+  background: #F6F6F6;
 }
 .top .tittle{
   position: relative;
@@ -65,7 +70,7 @@ ul{
   cursor: pointer;
 }
 .bot{
-  height: 100vh;
+  height: 90%;
   background: #fff;
   overflow-y: scroll;
 }
@@ -77,18 +82,33 @@ ul{
   cursor: pointer;
 }
 .search{
+  color: #BEBEBE;
+  border: none;
   border-radius: 50px;
-  border: 1px solid rgba(0, 0, 0, .20);
-  box-sizing: border-box;
+  background: #272727;
   font-family: Arial, sans-serif;
   font-size: 14px;
   height: 30px;
-  width: 80%;
   line-height: 30px;
-  padding-left: 1em;
   padding-right: 1em;
+  display: flex;
+  flex-direction: row;
+  margin: 0 1em;
 }
-
+.search .icon{
+  flex: 1;
+}
+.search .searchtext{
+  background: #272727;
+  border: none;
+  width: 50%;
+  flex: 5;
+  color: white;
+}
+.tag{
+  margin: 0;
+  background: #333333;
+}
 .tag .item{
 border-bottom: 1px solid rgba(0, 0, 0, .10);
 cursor: pointer;
@@ -97,17 +117,16 @@ cursor: pointer;
 .addtag{
   display: none;
 }
-
-.tag .item:hover  {
-background: #f7f7f7;
+.tag .item:hover, .inbox .item:hover {
+background: #272727;
 }
 
 .texttag{
-  margin-right: 12px;
+  margin: 0 1em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: rgba(0, 0, 0, 1);
+  color: white;
   font-size: 16px;
   line-height: 40px;
   font-weight: 600;
@@ -153,7 +172,9 @@ button {
   border-radius: 5px;
   border: 1px solid rgb(0, 140, 255);
   background: #fff;
-  color:  rgb(0, 140, 255);
+  color:  rgb(0, 140, 255); 
+}
+.join{
   width: 50%;
 }
 .join:hover{
@@ -161,16 +182,17 @@ button {
   color:  #fff;
 }
 .messages{
-  height: 75%;
+  height: 90%;
   border-bottom: 1px solid rgba(0, 0, 0, .10);
   background: #fff;
   overflow-y: scroll;
 }
 .send{
-  height: 25%;
+  height: 10%;
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, .10);
   background: #fff;
+  display: flex;
 }
 #message-box{
   overflow: hidden;
@@ -178,16 +200,19 @@ button {
 .send .type{
   margin-right: 12px;
   float: left;
+  width: 100%;
   border: none; 
   padding: 1em;
-  width: 90%;
   font-size: 14px;
 }
 .send button{
+  background: rgb(0, 140, 255);
+  color: white;
   position: relative;
   width: fit-content;
-  margin: 15px;
-  font-size: 16px;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: none;
 }
 *:focus{
   outline: none;
@@ -233,7 +258,9 @@ padding: 6px 12px;
   bottom: 2px;
   position: absolute;
 }
-
+.inbox{
+  background: #333333;
+}
 .inbox .item{
   cursor: pointer;
   height: 64px;
@@ -271,7 +298,7 @@ padding: 6px 12px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: rgba(0, 0, 0, 1);
+  color: white;
   font-size: 15px;
   font-weight: 400;
   line-height: 1.4;
@@ -280,6 +307,7 @@ padding: 6px 12px;
 .inbox .lastmessage{
   min-width: 0;
   overflow: hidden;
+  color: #BEBEBE;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
