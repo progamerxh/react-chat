@@ -1,23 +1,28 @@
 import React, { Component } from 'react';
 
 export default class User extends Component {
-    constructor(props) {
-        super(props);
-
-    }
     handleOnClick() {
         this.props.history.push(`/inbox/` + this.props.inbox.uid)
     }
 
     render() {
-        console.log(this.props.inbox)
+        var style;
+        if (this.props.inbox.isActive)
+            style = { color: "#86BB71" }
         return (
             <li className="item" onClick={() => this.handleOnClick()}>
 
                 <img className="avt" src={this.props.inbox.photoURL}></img>
                 <div className="content">
                     <div className="name">{this.props.inbox.displayName}</div>
-                    <div className="lastmessage">{this.props.inbox.lastTimeLoggedIn}</div>
+                    <div className="lastmessage">
+                        <i className="fa fa-circle" style={style}></i>
+                        {this.props.inbox.isActive ? (
+                            "Online"
+                        ) : (
+                                this.props.inbox.lastTimeLoggedIn
+                            )}
+                    </div>
                 </div>
             </li>
         )

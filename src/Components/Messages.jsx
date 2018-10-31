@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import Message from './Message';
 import MessageForm from './MessageForm';
+import { connect } from 'react-redux';
+import MessageList from './MessageList';
+import Signin from './SignIn';
+import * as authActions from '../Actions/authActions';
 
-class Messages extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            list: [],
-        };
-
-    }
+export class Messages extends Component {
 
     listenMessages() {
         if (this.props.match.params.touserid && this.props.user) {
@@ -44,35 +41,37 @@ class Messages extends Component {
         }
     }
 
-    componentDidMount() {
-        this.listenMessages();
-    }
-
-    componentWillReceiveProps() {
-        this.listenMessages();
-    }
-
     render() {
+        console.log("message component");
+        const { dispatch, userMessage, messages, thread } = this.props;
         var type;
         if (this.props.match.params.touserid)
             type = 'inbox';
         else type = 'room'
         return (
             <div id="message-box" className="bot">
-                <div className="messages">
-                    <ul className="list">
-                        {this.state.list.map((item, index) =>
-                            <Message key={index} message={item} type={type} />
-                        )}
-                    </ul>
-                </div>
+                <MessageList
+                    dispatch={dispatch}
+                    thread={thread}
+                    messages={messages}
+                    type={type}
+                />
                 <MessageForm
-                    {...this.props}
-                    touserid={this.props.match.params.touserid}
+                    userMessage={userMessage}
+                    dispatch={dispatch}
                 />
             </div>
         );
     }
 }
 
-export default Messages;
+const mapStateToProps = (state) => {
+    return {
+        thread: state.roomName,
+        userMessage: state.userMessage,
+        messages: state.messages
+    }
+};
+export default connect(
+    mapStateToProps
+)(Messages);

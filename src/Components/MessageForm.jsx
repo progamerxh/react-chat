@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import firebase from 'firebase'
+import { sendMessage } from '../Actions/messageActions';
 
 class MessageForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: null,
             message: '',
-            list: [],
         };
-    
-    }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.user) {
-            this.setState({ user: nextProps.user });
-        }
     }
 
     handleChange = e => {
@@ -29,10 +22,11 @@ class MessageForm extends Component {
             this.inboxRef = firebase.database().ref().child('inbox/' + inboxuid);
         } else
             this.messageRef = firebase.database().ref().child('messages/' + this.props.match.params.roomname);
-        if (this.state.message ) {
+        if (this.state.message) {
             if (this.inboxRef) {
                 var newItem = {
                     sendid: this.state.user.uid,
+                    photoURL: this.state.user.photoURL,
                     sendname: this.state.user.displayName,
                     message: this.state.message,
                     recieveid: this.props.touserid,
@@ -41,8 +35,9 @@ class MessageForm extends Component {
                 this.inboxRef.push(newItem);
             }
             else {
-                var newItem = {
+                newItem = {
                     userName: this.state.user.displayName,
+                    photoURL: this.state.user.photoURL,
                     message: this.state.message,
                 }
                 this.messageRef.push(newItem);
@@ -55,10 +50,12 @@ class MessageForm extends Component {
     handleKeyPress(event) {
         if (event.key !== 'Enter')
             return;
-        this.handleSend();
+        this.props.dispatch(sendMessage(this.state.message));
+        this.setState({ message: '' });
     }
 
     render() {
+
         return (
             <div className="send">
                 <input type="textarea"

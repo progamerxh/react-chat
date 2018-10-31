@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Tags extends Component {
 
   handleOnClick() {
-    this.props.history.push(`/inbox/X1HTOhOh5cbIFTPh7q8bELd42Ro2`);
+    
   }
 
   render() {

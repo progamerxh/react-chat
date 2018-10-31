@@ -3,13 +3,28 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './Components/App'
 import * as serviceWorker from './serviceWorker';
+import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux';
+import Reducers from './Reducers/Reducers';
+import firebase from 'firebase';
+import thunk from 'redux-thunk';
+import firebaseConfig from './config';
+
+firebase.initializeApp(firebaseConfig);
+const reduxMiddlewares = [thunk];
+
+const store = createStore(
+    Reducers,
+    applyMiddleware.apply(undefined, reduxMiddlewares)
+);
 
 ReactDOM.render((
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
-
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>
 ), document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change

@@ -3,19 +3,16 @@ import React, { Component } from 'react';
 export default class Message extends Component {
 
     render() {
+        const { photoURL, displayName, message } = this.props.message;
+        console.log(this.props.message);
         return (
             <li className="item">
-                <div className="avt"></div>
+                <img className="avt" src={photoURL}></img>
                 <div className="content">
-                    <h2>  {(this.props.type === 'room') ?
-                        (
-                            this.props.message.userName
-                        ) : (
-                            this.props.message.sendname
-                        )}
-                    </h2>
+                    <h2>  {displayName} </h2>
+
                     <div className="recieve">
-                        {this.props.message.message} </div>
+                        {message} </div>
                 </div>
             </li>
         )

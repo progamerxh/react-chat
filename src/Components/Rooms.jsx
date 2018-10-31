@@ -1,54 +1,28 @@
 import React, { Component } from 'react';
-import Room from './Room';
-import firebase from 'firebase';
+import { connect } from 'react-redux';
+import RoomList from './RoomList';
 
 class Rooms extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            list: [],
-        };
-    }
-
-
-    listenRooms() {
-        this.roomRef = firebase.database().ref().child('rooms');
-        this.roomRef
-            .limitToLast(10)
-            .on('value', rooms => {
-                var list = [];
-                rooms.forEach(room => {
-                    let name = room.key;
-                    let tags = room.val().tags;
-                    list.push({ name, tags })
-                })
-                if (rooms.val()) {
-                    this.setState({
-                        list: list
-                    });
-                }
-            });
-    }
-
-    componentDidMount() {
-        this.listenRooms();
-    }
 
     render() {
+        const { dispatch, rooms, isUserSignedIn } = this.props;
         return (
-            <div className="bot">
-                <div className="row">
-                    {this.state.list.map((item, index) =>
-                        <Room
-                            {...this.props}
-                            key={index}
-                            room={item}
-                        />
-                    )}
-                </div>
-            </div>
+            <RoomList
+                dispatch={dispatch}
+                isUserSignedIn={isUserSignedIn}
+                rooms={rooms}
+            />
         );
     }
 }
 
-export default Rooms;
+const mapStateToProps = (state) => {
+    return {
+        isUserSignedIn: state.auth.isUserSignedIn,
+        rooms: state.rooms
+    }
+};
+
+export default connect(
+    mapStateToProps
+)(Rooms);
