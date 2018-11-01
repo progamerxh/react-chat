@@ -9,6 +9,7 @@ import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase'
 import '../App.css'
 import Navbar from './Navbar';
 import InforPanel from './InforPanel';
+import SignIn from './SignIn';
 
 
 class Home extends Component {

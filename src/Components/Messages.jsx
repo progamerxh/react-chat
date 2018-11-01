@@ -31,7 +31,7 @@ export class Messages extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        thread: state.roomName,
+        thread: state.messageThread,
         userMessage: state.userMessage,
         messages: state.messages
     }

@@ -6,10 +6,6 @@ export default class User extends Component {
     static contextTypes = {
         router: PropTypes.object
     };
-    handleOnClick(uid) {
-        this.context.router.history.push(`inbox/` + uid)
-        this.props.dipatch(joinInbox());
-    }
 
     render() {
         const {user, dispatch} = this.props;
@@ -19,6 +15,7 @@ export default class User extends Component {
             <Link to={`/inbox/${user.uid}`}>
             <li className="item" onClick={() => {
                 dispatch(joinInbox(user));
+                console.log("join in click");
             }}>
     
                 <img className="avt" src={user.photoURL}></img>

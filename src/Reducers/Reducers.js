@@ -8,7 +8,7 @@ import * as inboxReducer from './inboxReducer';
 export default combineReducers({
     auth: authReducers.auth,
     userMessage: messageReducers.userMessage,
-    inboxThread: inboxReducer.inboxThread,
+    messageThread: messageReducers.messageThread,
     messages: messageReducers.messages,
     users: userReducers.users,
     userInbox: inboxReducer.userInbox, 

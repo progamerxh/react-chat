@@ -4,7 +4,6 @@ export default class Message extends Component {
 
     render() {
         const { photoURL, displayName, message } = this.props.message;
-        // console.log(this.props.message);
         return (
             <li className="item">
                 <img className="avt" src={photoURL}></img>

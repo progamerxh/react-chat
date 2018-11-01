@@ -13,9 +13,9 @@ export class Signin extends Component {
         if (!this.props.isUserSignedIn) {
             return (
                 <div className="App">
-                    <div className="signin" onClick={this.props.onSignInClick}>
-                        <h2>Welcom to ReactChat</h2>
-                        <div id="customBtn" className="customGPlusSignIn">
+                    <div className="signin" >
+                        <h1>Welcom to ReactChat</h1>
+                        <div id="customBtn" className="customGPlusSignIn" onClick={this.props.onSignInClick}>
                             <span className="icon"></span>
                             <span className="buttonText">Sign in with Google</span>
                         </div>

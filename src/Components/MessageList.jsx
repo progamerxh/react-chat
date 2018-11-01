@@ -9,19 +9,12 @@ export default class MessageList extends Component {
 
     componentDidMount() {
         console.log(this.props.thread);
-        if (this.props.type === 'room')
-            this._firebaseRef = firebase.database().ref(`messages/${this.props.thread}`)
-                .on('child_added', (snapshot) => {
-                    const { uid, displayName, photoURL, message } = snapshot.val();
-                    this.props.dispatch(retrieveMessage({ uid, displayName, photoURL, message }));
-                });
-        else
-            this._firebaseRef = firebase.database().ref(`inbox/${this.props.thread}`)
-                .on('child_added', (snapshot) => {
-                    const { uid, displayName, photoURL, message } = snapshot.val();
-                    this.props.dispatch(retrieveMessage({ uid, displayName, photoURL, message }));
-                });
-
+        this._firebaseRef = firebase.database().ref(`messages/${this.props.thread}`);
+        this._firebaseRef
+            .on('child_added', (snapshot) => {
+                const { uid, displayName, photoURL, message } = snapshot.val();
+                this.props.dispatch(retrieveMessage({ uid, displayName, photoURL, message }));
+            });
     }
 
     render() {
@@ -37,6 +30,7 @@ export default class MessageList extends Component {
         );
     }
     componentWillUnmount() {
+        this._firebaseRef.off();
         this.props.dispatch(refreshMessage());
     }
 }

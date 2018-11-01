@@ -1,4 +1,5 @@
 import * as types from './inboxActiontype';
+import { refreshMessage } from './messageActions';
 
 export const joinInboxSuccess = (messageThread, user) => {
     return {
@@ -15,13 +16,12 @@ export const leaveInbox = () => {
 };
 export const joinInbox = (user) => {
     return (dispatch, getState) => {
+        dispatch(refreshMessage());
         const { uid } = getState().auth;
-        let thread = (uid < user.touid) ? uid + user.touid : user.touid + uid;
+        let thread = (uid < user.uid) ? uid + user.uid : user.uid + uid;
         if (uid !== 0) {
             dispatch(joinInboxSuccess(thread, user));
         }
-        else
-            dispatch(leaveInbox());
     }
 }
 

@@ -1,4 +1,6 @@
 import * as types from '../Actions/messageActionTypes'
+import * as inboxtypes from '../Actions/inboxActiontype'
+import * as roomtypes from '../Actions/roomActionTypes'
 
 export const userMessageItems = (state, action) => {
   switch (action.type) {
@@ -70,3 +72,16 @@ export const messages = (state = [], action) => {
       return state;
   }
 };
+
+export const messageThread = (state = "", action) => {
+  switch (action.type) {
+    case inboxtypes.INBOX_JOINED_IN:
+      return action.messageThread;
+    case roomtypes.ROOM_JOINED_IN:
+      return action.roomName;
+ 
+    default:
+      return state;
+  }
+};
+

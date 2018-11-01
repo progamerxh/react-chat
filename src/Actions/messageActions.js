@@ -37,30 +37,21 @@ export const sendMessageError = () => {
 export const sendMessage = (message) => {
   return (dispatch, getState) => {
     const { uid, displayName, photoURL } = getState().auth;
-    console.log(getState().roomName);
-    console.log(getState().inboxThread);
     if (uid !== 0) {
       dispatch(sendMessageInProgress({ uid, displayName, photoURL, message }));
-      if (getState().roomName !== '') {
-        let thread = getState().roomName;
-        firebase.database().ref(`messages/${thread}`).push({
-          uid,
-          displayName,
-          photoURL,
-          message,
-          createdAt: firebase.database.ServerValue.TIMESTAMP
-        });
-      }
-      else {
-        let thread = getState().inboxThread;
-        firebase.database().ref(`inbox/${thread}`).push({
-          uid,
-          displayName,
-          photoURL,
-          message,
-          createdAt: firebase.database.ServerValue.TIMESTAMP
-        });
-      }
+      let thread = '';
+      if (getState().roomName !== '')
+        thread = getState().roomName;
+      else
+        thread = getState().inboxThread;
+      console.log(thread)
+      firebase.database().ref(`messages/${thread}`).push({
+        uid,
+        displayName,
+        photoURL,
+        message,
+        createdAt: firebase.database.ServerValue.TIMESTAMP
+      });
     } else {
       dispatch(sendMessageError());
     }
