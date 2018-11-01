@@ -235,8 +235,7 @@ background: #272727;
   margin: 2%;
   background-color: #fff;
 }
-.column img{
-  background: #808080;
+.column .roomphoto{
   width:100px;
   height: 100px;
   border-radius: 50%;

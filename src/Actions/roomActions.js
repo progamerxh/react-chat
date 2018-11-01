@@ -1,11 +1,11 @@
 import * as types from './roomActionTypes';
 import firebase from 'firebase';
 
-export const retrieveRoom = (roomName, tags) => {
+export const retrieveRoom = (roomName, room) => {
   return {
     type: types.RETRIEVE_ROOM,
     roomName,
-    tags
+    room
   }
 };
 

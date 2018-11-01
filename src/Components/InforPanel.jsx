@@ -10,20 +10,27 @@ export class InforPanel extends Component {
     };
 
     render() {
-        const { auth, onLogOutClick } = this.props;
+        const { auth, onLogOutClick, userInbox, roomName } = this.props;
         return (
             <div className="top">
-                {auth.isUserSignedIn ? (
+                {(roomName !== '') ? (
                     <div className="tittle">
-                        <img className="avt" src={auth.photoURL}></img>
-                        <div className="name">{auth.displayName}</div>
+                        <div className="name">{roomName}</div>
+                    </div>
+
+                ) : (null)}
+                {(userInbox !== '') ? (
+                    <div className="tittle">
+                        <img className="avt" src={userInbox.photoURL}></img>
+                        <div className="name">{userInbox.displayName}</div>
                         <div className="fav fa fa-star-o">
                         </div>
                         <div className="lastmessage">
                         </div>
                     </div>
-                ) : (<p></p>)
+                ) : (null)
                 }
+
                 <div className="account">
                     <img className="avt"
                         src={auth.photoURL}
@@ -38,7 +45,7 @@ export class InforPanel extends Component {
                     </Link>
 
                 </div>
-            </div>
+            </div >
         )
     }
 
@@ -46,7 +53,9 @@ export class InforPanel extends Component {
 
 const mapStateToProps = state => {
     return {
-        auth: state.auth
+        auth: state.auth,
+        roomName: state.roomName,
+        userInbox: state.userInbox
     }
 };
 

@@ -16,35 +16,7 @@ class MessageForm extends Component {
     }
 
     handleSend() {
-        if (this.props.match.params.touserid && this.props.user) {
-            var inboxuid = (this.props.user.uid < this.props.match.params.touserid) ? this.props.user.uid + this.props.match.params.touserid
-                : this.props.match.params.touserid + this.props.user.uid;
-            this.inboxRef = firebase.database().ref().child('inbox/' + inboxuid);
-        } else
-            this.messageRef = firebase.database().ref().child('messages/' + this.props.match.params.roomname);
-        if (this.state.message) {
-            if (this.inboxRef) {
-                var newItem = {
-                    sendid: this.state.user.uid,
-                    photoURL: this.state.user.photoURL,
-                    sendname: this.state.user.displayName,
-                    message: this.state.message,
-                    recieveid: this.props.touserid,
-                    recievename: this.props.touserid
-                }
-                this.inboxRef.push(newItem);
-            }
-            else {
-                newItem = {
-                    userName: this.state.user.displayName,
-                    photoURL: this.state.user.photoURL,
-                    message: this.state.message,
-                }
-                this.messageRef.push(newItem);
-
-            }
-            this.setState({ message: '' });
-        }
+        this.props.dispatch(sendMessage(this.state.message));
     }
 
     handleKeyPress(event) {

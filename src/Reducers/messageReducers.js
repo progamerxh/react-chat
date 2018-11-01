@@ -1,7 +1,7 @@
 import * as types from '../Actions/messageActionTypes'
 
 export const userMessageItems = (state, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case types.SEND_MESSAGE:
       const { uid, displayName, message, createdAt } = action;
       return [
@@ -27,7 +27,7 @@ const userMessageInitialState = {
 };
 
 export const userMessage = (state = userMessageInitialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case types.SEND_MESSAGE:
       return {
         ...state,
@@ -52,7 +52,7 @@ export const userMessage = (state = userMessageInitialState, action) => {
 };
 
 export const messages = (state = [], action) => {
-  switch(action.type) {
+  switch (action.type) {
     case types.RETRIEVE_MESSAGE:
       const { uid, displayName, message, photoURL } = action;
       return [
@@ -64,6 +64,8 @@ export const messages = (state = [], action) => {
           message
         }
       ];
+    case types.REFRESH_MESSAGE:
+      return state = [];
     default:
       return state;
   }

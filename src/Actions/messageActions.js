@@ -10,7 +10,11 @@ export const retrieveMessage = ({ uid, displayName, photoURL, message }) => {
     message
   }
 };
-
+export const refreshMessage = () => {
+  return {
+    type: types.REFRESH_MESSAGE,
+  }
+};
 export const sendMessageInProgress = (payload) => {
   return {
     type: types.SEND_MESSAGE,
@@ -32,19 +36,33 @@ export const sendMessageError = () => {
 
 export const sendMessage = (message) => {
   return (dispatch, getState) => {
-    const { uid,displayName, photoURL } = getState().auth;
+    const { uid, displayName, photoURL } = getState().auth;
+    console.log(getState().roomName);
+    console.log(getState().inboxThread);
     if (uid !== 0) {
-      dispatch( sendMessageInProgress({ uid, displayName, photoURL, message}) );
-      let thread = getState().roomName;
-      firebase.database().ref(`messages/${thread}`).push({
-        uid,
-        displayName,
-        photoURL,
-        message,
-        createdAt: firebase.database.ServerValue.TIMESTAMP
-      });
+      dispatch(sendMessageInProgress({ uid, displayName, photoURL, message }));
+      if (getState().roomName !== '') {
+        let thread = getState().roomName;
+        firebase.database().ref(`messages/${thread}`).push({
+          uid,
+          displayName,
+          photoURL,
+          message,
+          createdAt: firebase.database.ServerValue.TIMESTAMP
+        });
+      }
+      else {
+        let thread = getState().inboxThread;
+        firebase.database().ref(`inbox/${thread}`).push({
+          uid,
+          displayName,
+          photoURL,
+          message,
+          createdAt: firebase.database.ServerValue.TIMESTAMP
+        });
+      }
     } else {
-      dispatch( sendMessageError() );
+      dispatch(sendMessageError());
     }
   }
 };

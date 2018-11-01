@@ -1,12 +1,13 @@
 import * as types from './usersActionTypes';
-import firebase from 'firebase';
 
-
-
-export const addConnectedUser = ({ uid, userPayload }) => {
+export const retrieveUser = (uid, user) => {
   return {
-    type: types.USER_LOGGED_IN,
+    type: types.RETRIEVE_USER,
     uid,
-    userPayload
+    user
   }
 };
+
+
+
+

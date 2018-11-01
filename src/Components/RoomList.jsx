@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { retrieveRoom } from '../Actions/roomActions';
+import { retrieveRoom, leaveRoom } from '../Actions/roomActions';
 import Room from './Room';
 import firebase from 'firebase';
 
@@ -8,7 +8,7 @@ export default class RoomList extends Component {
     componentDidMount() {
         this._firebaseRef = firebase.database().ref('rooms');
         this._firebaseRef.on('child_added', snapshot => {
-            this.props.dispatch(retrieveRoom(snapshot.key, snapshot.val().tags));
+            this.props.dispatch(retrieveRoom(snapshot.key, snapshot.val()));
         });
     }
 
@@ -19,8 +19,8 @@ export default class RoomList extends Component {
                 <div className="row">
                     {rooms.map((item, index) =>
                         <Room
-                            dispatch={dispatch}
                             key={index}
+                            dispatch={dispatch}
                             room={item}
                         />
                     )}
@@ -31,5 +31,6 @@ export default class RoomList extends Component {
 
     componentWillUnmount() {
         this._firebaseRef.off();
+        this.props.dispatch(leaveRoom())
     }
 }

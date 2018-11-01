@@ -1,53 +1,39 @@
 import React, { Component } from 'react';
 import User from './User'
 import firebase from 'firebase';
+import { retrieveUser } from '../Actions/usersActions';
+import { leaveInbox } from '../Actions/inboxActions';
 
-class UserList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: [],
-    };
-  }
-
-  listenRooms() {
-    this.userRef = firebase.database().ref().child('users');
-    this.userRef
-      .limitToLast(10)
-      .on('value', users => {
-        var list = [];
-        users.forEach(user => {
-          let uid = user.key;
-          let val = user.val();
-          val.uid = uid;
-          list.push(val);
-
-        })
-        if (users.val()) {
-          this.setState({
-            list
-          });
-        }
-      });
-  }
-
+export default class UserList extends Component {
   componentDidMount() {
-    this.listenRooms();
+    this._firebaseRef = firebase.database().ref('users');
+    this._firebaseRef.on('child_added', snapshot => {
+      this.props.dispatch(retrieveUser(snapshot.key,snapshot.val()));
+    });
   }
+
 
   render() {
+    const { users, dispatch } = this.props;
     return (
       <div className="bot inbox">
         <ul className="list">
           {
-            this.state.list.map((item, index) =>
-              <User {...this.props} key={index} inbox={item} />
+            users.map((item, index) =>
+              <User
+                key={index}
+                dispatch={dispatch}
+                user={item} />
             )
           }
         </ul>
       </div>
     );
   }
-}
 
-export default UserList;
+  componentWillUnmount() {
+    this._firebaseRef.off();
+    this.props.dispatch(leaveInbox());
+  }
+
+}

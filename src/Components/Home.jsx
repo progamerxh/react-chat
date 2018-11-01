@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import Messages from './Messages';
 import Rooms from './Rooms';
 import Tags from './Tags';
-import UserList from './UserList';
-
+import Users from './Users';
 import SearchForm from './SearchForm';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase'
@@ -23,8 +22,8 @@ class Home extends Component {
             <SearchForm onUserLogin={this.handleUserLogin} />
             <Switch>
               <Route path='/home' component={Tags} />
-              <Route path='/room/:roomname' component={UserList} />
-              <Route path='/inbox/' component={UserList} />
+              <Route path='/room/:roomname' component={Users} />
+              <Route path='/inbox/' component={Users} />
             </Switch>
           </div>
           <div className="right">
