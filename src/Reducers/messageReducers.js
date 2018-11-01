@@ -74,12 +74,12 @@ export const messages = (state = [], action) => {
 };
 
 export const messageThread = (state = "", action) => {
+  console.log(action.type);
   switch (action.type) {
     case inboxtypes.INBOX_JOINED_IN:
       return action.messageThread;
     case roomtypes.ROOM_JOINED_IN:
       return action.roomName;
- 
     default:
       return state;
   }

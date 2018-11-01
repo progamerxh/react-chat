@@ -1,19 +1,40 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
+import MessageForm from './MessageForm';
+import { connect } from 'react-redux';
+import MessageList from './MessageList';
 
-export default class Message extends Component {
+export class Message extends Component {
 
+    componentWillUpdate() {
+        console.log(this.props.messageThread);
+    }
+    
     render() {
-        const { photoURL, displayName, message } = this.props.message;
-        return (
-            <li className="item">
-                <img className="avt" src={photoURL}></img>
-                <div className="content">
-                    <h2>  {displayName} </h2>
+        const { dispatch, userMessage, messages, messageThread } = this.props;
 
-                    <div className="recieve">
-                        {message} </div>
-                </div>
-            </li>
-        )
+        return (
+            <div id="message-box" className="bot">
+                <MessageList
+                    dispatch={dispatch}
+                    messages={messages}
+                />
+                <MessageForm
+                    userMessage={userMessage}
+                    dispatch={dispatch}
+                />
+            </div>
+        );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        userMessage: state.userMessage,
+        messages: state.messages,
+        messageThread: state.messageThread
+    }
+};
+export default connect(
+    mapStateToProps
+)(Message);

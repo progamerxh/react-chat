@@ -1,2 +1,2 @@
-
 export const RETRIEVE_USER = 'RETRIEVE_USER';
+export const REFRESH_USER = 'REFRESH_USER';

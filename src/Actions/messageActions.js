@@ -39,12 +39,12 @@ export const sendMessage = (message) => {
     const { uid, displayName, photoURL } = getState().auth;
     if (uid !== 0) {
       dispatch(sendMessageInProgress({ uid, displayName, photoURL, message }));
-      let thread = '';
-      if (getState().roomName !== '')
+      let thread = getState().inboxThread;
+      if (getState().roomName !== '' && getState().roomName !== thread)
         thread = getState().roomName;
-      else
+      else if (getState().inboxThread !== '' && getState().inboxThread !== thread)
         thread = getState().inboxThread;
-      console.log(thread)
+      console.log(thread);
       firebase.database().ref(`messages/${thread}`).push({
         uid,
         displayName,

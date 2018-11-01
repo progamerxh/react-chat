@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Messages from './Messages';
-import Rooms from './Rooms';
+import Message from './Message';
+import RoomList from './RoomList';
 import Tags from './Tags';
 import Users from './Users';
 import SearchForm from './SearchForm';
@@ -9,7 +9,6 @@ import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase'
 import '../App.css'
 import Navbar from './Navbar';
 import InforPanel from './InforPanel';
-import SignIn from './SignIn';
 
 
 class Home extends Component {
@@ -30,9 +29,9 @@ class Home extends Component {
           <div className="right">
             <InforPanel />
             <Switch>
-              <Route path='/home' component={Rooms} />
-              <Route path='/room/:roomname' component={Messages} />} />
-            <Route path='/inbox/:touserid' component={Messages} />
+              <Route path='/home' component={RoomList} />
+              <Route path='/room/:roomname' component={Message} />} />
+            <Route path='/inbox/:touserid' component={Message} />
             </Switch>
           </div>
         </div>

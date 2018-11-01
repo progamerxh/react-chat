@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { retrieveMessage, refreshMessage } from '../Actions/messageActions';
-import Message from './Message';
 import firebase from 'firebase';
-import { leaveInbox } from '../Actions/inboxActions';
-import { leaveRoom } from '../Actions/roomActions';
+import { connect } from 'react-redux';
 
-export default class MessageList extends Component {
+export class MessageList extends Component {
 
-    componentDidMount() {
-        console.log(this.props.thread);
-        this._firebaseRef = firebase.database().ref(`messages/${this.props.thread}`);
+    componentWillMount() {
+        console.log(this.props.messageThread);
+        this._firebaseRef = firebase.database().ref(`messages/${this.props.messageThread}`);
         this._firebaseRef
             .on('child_added', (snapshot) => {
                 const { uid, displayName, photoURL, message } = snapshot.val();
@@ -18,13 +16,23 @@ export default class MessageList extends Component {
     }
 
     render() {
-        const { messages, type } = this.props;
+        const { messages } = this.props;
         return (
             <div className="messages">
                 <ul className="list">
-                    {messages.map((item, index) =>
-                        <Message key={index} message={item} type={type} />
-                    )}
+                    {messages.map((message, index) => {
+                        return (
+                            <li className="item" key={index}>
+                                <img className="avt" src={message.photoURL}></img>
+                                <div className="content">
+                                    <h2>  {message.displayName} </h2>
+
+                                    <div className="recieve">
+                                        {message.message} </div>
+                                </div>
+                            </li>
+                        )
+                    })}
                 </ul>
             </div>
         );
@@ -34,3 +42,11 @@ export default class MessageList extends Component {
         this.props.dispatch(refreshMessage());
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        messageThread: state.messageThread,
+    }
+};
+export default connect(
+    mapStateToProps
+)(MessageList);

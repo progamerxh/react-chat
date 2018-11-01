@@ -21,5 +21,9 @@ export const leaveRoom = () => {
     type: types.ROOM_LEFT,
   }
 };
-
+export const refreshRoom = () => {
+  return {
+    type: types.REFRESH_ROOM,
+  }
+};
 

@@ -1,13 +1,10 @@
 import * as types from '../Actions/roomActionTypes'
-import { INBOX_JOINED_IN } from '../Actions/inboxActiontype'
-import {REFRESH_MESSAGE} from '../Actions/messageActionTypes'
+
 export const roomName = (state = "", action) => {
     switch (action.type) {
         case types.ROOM_JOINED_IN:
             return action.roomName;
-        case REFRESH_MESSAGE:
-            return '';
-        case INBOX_JOINED_IN:
+        case types.ROOM_LEFT:
             return '';
         default:
             return state;
@@ -26,7 +23,7 @@ export const rooms = (state = [], action) => {
                     photoURL: room.photoURL
                 }
             ];
-        case types.ROOM_LEFT:
+        case types.REFRESH_ROOM:
             return state = [];
         default:
             return state;

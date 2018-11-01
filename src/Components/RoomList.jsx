@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { retrieveRoom, leaveRoom } from '../Actions/roomActions';
-import Room from './Room';
+import { retrieveRoom } from '../Actions/roomActions';
+import { refreshRoom, joininRoom } from '../Actions/roomActions';
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 import firebase from 'firebase';
 
-export default class RoomList extends Component {
+export class RoomList extends Component {
 
-    componentDidMount() {
+    componentWillMount() {
         this._firebaseRef = firebase.database().ref('rooms');
         this._firebaseRef.on('child_added', snapshot => {
             this.props.dispatch(retrieveRoom(snapshot.key, snapshot.val()));
@@ -17,20 +19,38 @@ export default class RoomList extends Component {
         return (
             <div className="bot">
                 <div className="row">
-                    {rooms.map((item, index) =>
-                        <Room
-                            key={index}
-                            dispatch={dispatch}
-                            room={item}
-                        />
-                    )}
+                    {rooms.map((room, index) => {
+                        return (
+                            <div className="column" key={index} >
+                                <img src={room.photoURL} alt="" className="roomphoto"></img>
+                                <h4>{room.roomName}</h4>
+                                <p>Tags: {room.tags}</p>
+                                <Link to={`/room/${room.roomName}`}>
+                                    <button className="join"
+                                        onClick={() => {
+                                            dispatch(joininRoom(room.roomName));
+                                        }}>
+                                        <h5>Join</h5>
+                                    </button>
+                                </Link>
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
         );
     }
-
     componentWillUnmount() {
         this._firebaseRef.off();
-        this.props.dispatch(leaveRoom())
+        this.props.dispatch(refreshRoom())
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        rooms: state.rooms
+    }
+};
+
+export default connect(
+    mapStateToProps
+)(RoomList);

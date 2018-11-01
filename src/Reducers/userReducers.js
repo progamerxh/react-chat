@@ -1,5 +1,4 @@
 import * as types from '../Actions/usersActionTypes';
-import { INBOX_LEFT } from '../Actions/inboxActiontype';
 
 export const users = (state = [], action) => {
     const user = action.user;
@@ -16,7 +15,7 @@ export const users = (state = [], action) => {
                     lastTimeLoggedIn: user.lastTimeLoggedIn
                 }
             ];
-        case INBOX_LEFT:
+        case types.REFRESH_USER:
             return state = [];
         default:
             return state;

@@ -2,27 +2,23 @@
 ::-webkit-scrollbar {
   width: 10px;
 }
-
 /* Track */
 ::-webkit-scrollbar-track {
-  background: null; 
+  background: null;
 }
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #F6F6F6; 
+  background: #F6F6F6;
 }
-
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #808080; 
+  background: #808080;
 }
 ul{
   list-style-type: none;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
-
 .App {
   height: 90vh;
   width: 80vw;
@@ -80,7 +76,7 @@ span.buttonText {
 .navitems li{
   margin-bottom: 30px;
   font-size: 30px;
-  display: block
+  display: block 
 }
 .navitems .avt{
   background: rgb(0, 140, 255);
@@ -123,14 +119,12 @@ span.buttonText {
   line-height: 28px;
   position: relative;
   align-content: space-around;
-
 }
 .tittle .avt{
   float: left;
   position: relative;
   bottom: 0;
 }
-
 .tittle .name{
   float: left;
   margin-left: 5px;
@@ -150,13 +144,12 @@ span.buttonText {
   float: right;
   line-height: 32px;
 }
-
 .account .button{
   float: right;
   cursor: pointer;
   border: none;
   background: #f7f7f7;
-  color:  rgb(0, 140, 255);
+  color: rgb(0, 140, 255);
 }
 .account .avt{
   position: relative;
@@ -204,17 +197,15 @@ span.buttonText {
   background: #333333;
 }
 .tag .item{
-border-bottom: 1px solid rgba(0, 0, 0, .10);
-cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, .10);
+  cursor: pointer;
 }
-
 .addtag{
   display: none;
 }
 .tag .item:hover, .inbox .item:hover {
-background: #272727;
+  background: #272727;
 }
-
 .texttag{
   margin: 0 1em;
   overflow: hidden;
@@ -239,7 +230,6 @@ background: #272727;
   height: 100px;
   border-radius: 50%;
 }
-
 .column h4, p{
   text-overflow: ellipsis;
   overflow: hidden;
@@ -265,14 +255,14 @@ button {
   border-radius: 5px;
   border: 1px solid rgb(0, 140, 255);
   background: #fff;
-  color:  rgb(0, 140, 255); 
+  color: rgb(0, 140, 255);
 }
 .join{
   width: 50%;
 }
 .join:hover{
   background: rgb(0, 140, 255);
-  color:  #fff;
+  color: #fff;
 }
 .messages{
   height: 90%;
@@ -294,7 +284,7 @@ button {
   margin-right: 12px;
   float: left;
   width: 100%;
-  border: none; 
+  border: none;
   padding: 1em;
   font-size: 14px;
 }
@@ -319,29 +309,24 @@ button {
   font-style: normal;
   max-width: 55%;
 }
-
-.messages .sended
-{
+.messages .sended {
   float: right;
 }
 .content{
   margin-left: 36px;
 }
-
 .content h2{
- font-size: 12px;
- text-align: left;
+  font-size: 12px;
+  text-align: left;
 }
-
 .recieve{
-color: black;
-background: #f7f7f7;
-font-size: 14px;
-border-radius: 1.3em;
-text-align: left;
-padding: 6px 12px;
+  color: black;
+  background: #f7f7f7;
+  font-size: 14px;
+  border-radius: 1.3em;
+  text-align: left;
+  padding: 6px 12px;
 }
-
 .avt{
   background: rgb(0, 140, 255);
   border-radius: 100%;
@@ -352,11 +337,9 @@ padding: 6px 12px;
   bottom: 2px;
   position: absolute;
 }
-
 .messages .avt{
   left: 10px;
 }
-
 .inbox{
   background: #333333;
 }
@@ -369,28 +352,24 @@ padding: 6px 12px;
   display: flex;
   padding-left: 12px;
 }
-
 .inbox .avt{
   align-items: center;
-    margin-right: 9px;
-    height: 50px;
-    width: 50px;
-    max-height: 50px;
-    max-width: 50px;
-    border-radius: 100%;
-    background:  rgb(0, 140, 255);
+  margin-right: 9px;
+  height: 50px;
+  width: 50px;
+  max-height: 50px;
+  max-width: 50px;
+  left: 6px;
+  bottom: 6px;
 }
-
 .inbox .content{
-  flex: 1 1 auto;
-  justify-content: center;
   min-width: 0;
   padding: 0 16px 0 0;
   text-align: left;
-  display: flex;
-  flex-direction: column;
   margin-left: 56px;
+  margin-top: 14px;
   text-overflow: ellipsis;
+  position: relative;
 }
 .inbox .name{
   min-width: 0;
@@ -402,7 +381,6 @@ padding: 6px 12px;
   font-weight: 400;
   line-height: 1.4;
 }
-
 .inbox .lastmessage{
   min-width: 0;
   overflow: hidden;
@@ -413,7 +391,6 @@ padding: 6px 12px;
 .lastmessage .fa{
   margin-right: 5px;
 }
-
 .online{
   color: #86BB71;
 }
