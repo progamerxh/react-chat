@@ -29,7 +29,7 @@ export class InforPanel extends Component {
                         src={auth.photoURL}
                         alt={auth.displayName}
                     />
-                    <Link to='/signin'>
+                    <Link to='/'>
                         <button
                             className="button"
                             onClick={onLogOutClick}>
