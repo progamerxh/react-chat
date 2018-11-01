@@ -2,19 +2,15 @@ import React, { Component } from 'react';
 import * as authActions from '../Actions/authActions';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom"
 
 export class InforPanel extends Component {
     static contextTypes = {
         router: PropTypes.object
     };
 
-    handleLogOut() {
-        this.props.dispatch(authActions.logout());
-        this.context.router.history.push("/signin");
-    }
-
     render() {
-        const { auth } = this.props;
+        const { auth, onLogOutClick } = this.props;
         return (
             <div className="top">
                 {auth.isUserSignedIn ? (
@@ -33,11 +29,14 @@ export class InforPanel extends Component {
                         src={auth.photoURL}
                         alt={auth.displayName}
                     />
-                    <button
-                        className="button"
-                        onClick={this.handleLogOut()}>
-                        Logout
-                 </button>
+                    <Link to='/signin'>
+                        <button
+                            className="button"
+                            onClick={onLogOutClick}>
+                            Logout
+                        </button>
+                    </Link>
+
                 </div>
             </div>
         )
@@ -51,9 +50,17 @@ const mapStateToProps = state => {
     }
 };
 
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogOutClick: () => {
+            dispatch(authActions.logout())
+        }
+    }
+};
 
 const InforPanelContainer = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(InforPanel);
 
 export default InforPanelContainer;

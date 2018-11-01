@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 export default class User extends Component {
+    static contextTypes = {
+        router: PropTypes.object
+    };
     handleOnClick() {
-        this.props.history.push(`/inbox/` + this.props.inbox.uid)
+        this.context.router.history.push(`inbox/` + this.props.inbox.uid)
     }
 
     render() {

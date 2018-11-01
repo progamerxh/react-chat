@@ -23,16 +23,16 @@ class Home extends Component {
             <SearchForm onUserLogin={this.handleUserLogin} />
             <Switch>
               <Route path='/home' component={Tags} />
-              <Route exact path='/room/:roomname' component={UserList} />
-              <Route exact path='/inbox/' component={UserList} />
+              <Route path='/room/:roomname' component={UserList} />
+              <Route path='/inbox/' component={UserList} />
             </Switch>
           </div>
           <div className="right">
             <InforPanel />
             <Switch>
-              <Route  path='/home' component={Rooms} />
-              <Route exact path='/room/:roomname' component={Messages} />} />
-            <Route exact path='/inbox/:touserid' component={Messages} />
+              <Route path='/home' component={Rooms} />
+              <Route path='/room/:roomname' component={Messages} />} />
+            <Route path='/inbox/:touserid' component={Messages} />
             </Switch>
           </div>
         </div>

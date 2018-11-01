@@ -15,8 +15,8 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-          <Route exact path='/' component={Signin} />
-          <Route path='/home' component={requireAuth(Home)} />
+          <Route  path='/' component={Signin} />
+          <Route path='/' component={requireAuth(Home)} />
       </div>
 
     );
