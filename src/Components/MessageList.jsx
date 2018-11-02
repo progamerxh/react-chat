@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { leaveInbox } from '../Actions/inboxActions';
 import { leaveRoom } from '../Actions/roomActions';
 
-export class MessageList extends Component {
+export default class MessageList extends Component {
 
     componentDidMount() {
         console.log(this.props.messageThread);
@@ -50,11 +50,3 @@ export class MessageList extends Component {
         this.props.dispatch(leaveRoom());
     }
 }
-const mapStateToProps = (state) => {
-    return {
-        messageThread: state.messageThread,
-    }
-};
-export default connect(
-    mapStateToProps
-)(MessageList);

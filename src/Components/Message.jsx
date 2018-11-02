@@ -8,13 +8,14 @@ export class Message extends Component {
 
   
     render() {
-        const { dispatch, userMessage, messages } = this.props;
+        const { dispatch, userMessage, messages, messageThread } = this.props;
 
         return (
             <div id="message-box" className="bot">
                 <MessageList
                     dispatch={dispatch}
                     messages={messages}
+                    messageThread={messageThread}
                 />
                 <MessageForm
                     userMessage={userMessage}
