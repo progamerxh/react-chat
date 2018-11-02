@@ -6,12 +6,9 @@ import MessageList from './MessageList';
 
 export class Message extends Component {
 
-    componentWillUpdate() {
-        console.log(this.props.messageThread);
-    }
-    
+  
     render() {
-        const { dispatch, userMessage, messages, messageThread } = this.props;
+        const { dispatch, userMessage, messages } = this.props;
 
         return (
             <div id="message-box" className="bot">

@@ -108,14 +108,13 @@ span.buttonText {
   height: 10%;
   min-height: 50px;
   justify-content: space-between;
-  padding: 8px;
+  padding: 10px;
   width: 100%;
 }
 .right .top{
   background: #F6F6F6;
 }
 .top .tittle{
-  padding-top: 5px;
   line-height: 28px;
   position: relative;
   align-content: space-around;
@@ -206,6 +205,9 @@ span.buttonText {
 .tag .item:hover, .inbox .item:hover {
   background: #272727;
 }
+.tag .item:visited, .inbox .item:visited {
+  background: #272727;
+}
 .texttag{
   margin: 0 1em;
   overflow: hidden;
@@ -226,10 +228,11 @@ span.buttonText {
   background-color: #fff;
 }
 .column .roomphoto{
-  width:100px;
-  height: 100px;
+  max-width:100%;
+  max-height:100%;
   border-radius: 50%;
 }
+
 .column h4, p{
   text-overflow: ellipsis;
   overflow: hidden;
@@ -237,8 +240,16 @@ span.buttonText {
   white-space: nowrap;
 }
 .column h4{
-  margin: 10px;
+  margin: 10px 0;
   color: rgb(0, 140, 255);
+}
+
+.column .jointext{
+  overflow: hidden;
+  white-space: nowrap;
+  display: block;
+  font-size: 18px;
+  text-overflow: ellipsis;
 }
 .row{
   margin-right: 5%;
@@ -332,8 +343,8 @@ button {
   border-radius: 100%;
   height: 32px;
   width: 32px;
-  max-height: 28px;
-  max-width: 28px;
+  max-height: 32px;
+  max-width: 32px;
   bottom: 2px;
   position: absolute;
 }

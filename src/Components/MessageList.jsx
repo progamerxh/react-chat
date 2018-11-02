@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { retrieveMessage, refreshMessage } from '../Actions/messageActions';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
+import { leaveInbox } from '../Actions/inboxActions';
+import { leaveRoom } from '../Actions/roomActions';
 
 export class MessageList extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         console.log(this.props.messageThread);
         this._firebaseRef = firebase.database().ref(`messages/${this.props.messageThread}`);
         this._firebaseRef
@@ -15,6 +17,10 @@ export class MessageList extends Component {
             });
     }
 
+    componentDidUpdate() {
+        console.log(this.props.messageThread);
+    }
+    
     render() {
         const { messages } = this.props;
         return (
@@ -40,6 +46,8 @@ export class MessageList extends Component {
     componentWillUnmount() {
         this._firebaseRef.off();
         this.props.dispatch(refreshMessage());
+        this.props.dispatch(leaveInbox());
+        this.props.dispatch(leaveRoom());
     }
 }
 const mapStateToProps = (state) => {

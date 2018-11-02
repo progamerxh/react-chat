@@ -17,8 +17,8 @@ export const leaveInbox = () => {
 };
 export const joinInbox = (user) => {
     return (dispatch, getState) => {
+        dispatch(leaveRoom());
         dispatch(refreshMessage());
-        // dispatch(leaveRoom());
         const { uid } = getState().auth;
         let thread = (uid < user.uid) ? uid + user.uid : user.uid + uid;
         console.log(thread);

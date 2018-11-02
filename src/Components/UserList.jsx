@@ -4,10 +4,11 @@ import { retrieveUser, refreshUser } from '../Actions/usersActions';
 import { Link } from 'react-router-dom'
 import { joinInbox } from '../Actions/inboxActions';
 import { connect } from 'react-redux';
+import { leaveRoom } from '../Actions/roomActions';
 
 export class UserList extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     this._firebaseRef = firebase.database().ref('users');
     this._firebaseRef.on('child_added', snapshot => {
       this.props.dispatch(retrieveUser(snapshot.key, snapshot.val()));
@@ -25,7 +26,7 @@ export class UserList extends Component {
                 var style = { color: "#86BB71" }
               return (
                 <li key={index} className="item" onClick={() => {
-                  dispatch(joinInbox(user))
+                  dispatch(joinInbox(user));
                 }}>
                   <Link to={`/inbox/${user.uid}`}>
                     <img className="avt" src={user.photoURL}></img>

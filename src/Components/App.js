@@ -8,7 +8,7 @@ import requireAuth from './requireAuth'
 import '../App.css'
 
 class App extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchUser();
   }
 

@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import Message from './Message';
 import RoomList from './RoomList';
 import Tags from './Tags';
-import Users from './Users';
+import UserList from './UserList';
 import SearchForm from './SearchForm';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase'
 import '../App.css'
 import Navbar from './Navbar';
 import InforPanel from './InforPanel';
@@ -22,8 +21,8 @@ class Home extends Component {
             <SearchForm onUserLogin={this.handleUserLogin} />
             <Switch>
               <Route path='/home' component={Tags} />
-              <Route path='/room/:roomname' component={Users} />
-              <Route path='/inbox/' component={Users} />
+              <Route path='/room/:roomname' component={UserList} />
+              <Route path='/inbox/' component={UserList} />
             </Switch>
           </div>
           <div className="right">

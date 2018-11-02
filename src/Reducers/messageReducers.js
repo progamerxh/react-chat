@@ -75,6 +75,7 @@ export const messages = (state = [], action) => {
 
 export const messageThread = (state = "", action) => {
   console.log(action.type);
+  console.log(action.messageThread)
   switch (action.type) {
     case inboxtypes.INBOX_JOINED_IN:
       return action.messageThread;

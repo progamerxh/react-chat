@@ -3,21 +3,32 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './Components/App'
 import * as serviceWorker from './serviceWorker';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose  } from 'redux';
+import { reactReduxFirebase } from 'react-redux-firebase'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux';
-import Reducers from './Reducers/Reducers';
+import rootReducer from './Reducers/Reducers';
 import firebase from 'firebase';
 import thunk from 'redux-thunk';
 import firebaseConfig from './config';
 
-firebase.initializeApp(firebaseConfig);
-const reduxMiddlewares = [thunk];
+// react-redux-firebase config
+const rrfConfig = {
+    userProfile: 'users',
+    // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
+}
 
-const store = createStore(
-    Reducers,
-    applyMiddleware.apply(undefined, reduxMiddlewares)
-);
+// Initialize firebase instance
+firebase.initializeApp(firebaseConfig);
+
+// Add reactReduxFirebase enhancer when making store creator
+const createStoreWithFirebase = compose(
+    reactReduxFirebase(firebase, rrfConfig), // firebase instance as first argument
+    // reduxFirestore(firebase) // <- needed if using firestore
+)(createStore)
+const initialState = {};
+const middlewares = applyMiddleware(thunk)
+const store = createStoreWithFirebase(rootReducer, initialState, middlewares);
 
 ReactDOM.render((
     <Provider store={store}>
